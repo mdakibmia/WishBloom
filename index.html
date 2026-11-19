@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#fff5f7">
+  <title>WishBloom — Make Their Day Special</title>
+  <meta name="description" content="Create a beautiful, personalized birthday surprise card for someone special.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --ink: #392b35; --muted: #796b75; --pink: #d9789c; --pink-dark: #a94e76;
+      --cream: #fffaf7; --line: #f0e2e8; --shadow: 0 18px 55px rgba(111, 63, 84, .10);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; color: var(--ink); background: #fffaf9; font-family: "DM Sans", sans-serif; }
+    button, input, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    .nav { height: 76px; display:flex; align-items:center; justify-content:space-between; max-width:1160px; padding:0 24px; margin:auto; }
+    .brand { font:700 25px "Playfair Display",serif; letter-spacing:-.5px; color:var(--pink-dark); }
+    .brand span { color:var(--ink); }
+    .nav a { color:var(--muted); text-decoration:none; font-size:14px; margin-left:24px; }
+    .hero { overflow:hidden; position:relative; background: radial-gradient(circle at 85% 15%, #f8dce7 0, transparent 28%), linear-gradient(135deg,#fff4f6,#fffaf5 65%,#f9f0fb); }
+    .hero-inner { max-width:1160px; min-height:510px; margin:auto; padding:75px 24px 80px; display:grid; grid-template-columns:1.1fr .9fr; align-items:center; gap:45px; }
+    .eyebrow { color:var(--pink-dark); text-transform:uppercase; letter-spacing:2px; font-size:11px; font-weight:700; }
+    h1 { font:600 clamp(42px,6vw,68px)/1.08 "Playfair Display",serif; letter-spacing:-1.7px; margin:18px 0; }
+    h1 em { color:var(--pink-dark); font-style:normal; }
+    .hero p { color:var(--muted); line-height:1.8; max-width:490px; font-size:16px; }
+    .btn { border:0; border-radius:999px; background:var(--pink-dark); color:white; padding:14px 23px; font-weight:700; box-shadow:0 9px 22px #a94e7630; transition:.2s; }
+    .btn:hover { transform:translateY(-2px); box-shadow:0 12px 25px #a94e7640; }
+    .btn.secondary { color:var(--pink-dark); background:white; border:1px solid var(--line); box-shadow:none; }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; margin-top:27px; }
+    .hero-art { min-height:330px; display:grid; place-items:center; position:relative; }
+    .hero-card { width:min(330px,85%); padding:24px; background:#fff; border:1px solid #f3e2e9; border-radius:22px; text-align:center; transform:rotate(4deg); box-shadow:var(--shadow); position:relative; }
+    .hero-card .mini-photo { height:190px; border-radius:15px; background:linear-gradient(145deg,#f5dce6,#f9eddf); display:grid; place-items:center; font-size:70px; }
+    .hero-card h2 { font:600 31px "Dancing Script",cursive; color:var(--pink-dark); margin:14px 0 2px; }
+    .hero-card p { margin:0; font-size:12px; }
+    .float { position:absolute; font-size:32px; animation:float 4s ease-in-out infinite; }
+    .f1 { top:25px; left:12%; } .f2 { right:4%; top:60px; animation-delay:1s; } .f3 { bottom:22px; left:15%; animation-delay:2s; }
+    @keyframes float { 50% { transform:translateY(-13px) rotate(8deg); } }
+    section { padding:82px 24px; }
+    .section-inner { max-width:1160px; margin:auto; }
+    .section-head { text-align:center; max-width:650px; margin:0 auto 38px; }
+    .section-head h2 { font:600 clamp(31px,4vw,43px) "Playfair Display",serif; margin:10px 0; }
+    .section-head p { color:var(--muted); line-height:1.7; margin:0; }
+    .features { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+    .feature { background:white; border:1px solid var(--line); border-radius:18px; padding:25px; box-shadow:0 8px 30px #603b4d08; }
+    .feature .emoji { font-size:27px; } .feature h3 { margin:13px 0 7px; font:600 20px "Playfair Display",serif; }
+    .feature p { margin:0; color:var(--muted); font-size:14px; line-height:1.7; }
+    #create { background:#fff3f6; }
+    .creator { display:grid; grid-template-columns:.9fr 1.1fr; gap:25px; align-items:start; }
+    .panel { background:white; border:1px solid var(--line); border-radius:20px; padding:25px; box-shadow:var(--shadow); }
+    .panel h3 { font:600 23px "Playfair Display",serif; margin:0 0 20px; }
+    .field { margin-bottom:16px; }
+    label { display:block; font-size:13px; font-weight:700; margin-bottom:7px; }
+    input[type="text"], textarea, select { width:100%; border:1px solid #eadde3; background:#fffdfd; border-radius:11px; padding:12px 13px; outline:none; color:var(--ink); }
+    input:focus, textarea:focus, select:focus { border-color:var(--pink); box-shadow:0 0 0 3px #d9789c18; }
+    textarea { resize:vertical; min-height:92px; line-height:1.5; }
+    input[type="file"] { width:100%; border:1px dashed #dcb9c8; border-radius:11px; padding:12px; background:#fff9fb; font-size:13px; }
+    .hint { color:var(--muted); font-size:11px; margin-top:6px; }
+    .theme-options { display:grid; grid-template-columns:repeat(3,1fr); gap:9px; }
+    .theme-option { border:1px solid var(--line); border-radius:11px; padding:10px 5px; background:#fff; color:var(--muted); font-size:12px; }
+    .theme-option.active { border:2px solid var(--pink); color:var(--pink-dark); background:#fff5f8; font-weight:700; }
+    .preview-wrap { position:sticky; top:18px; }
+    .preview-label { display:flex; justify-content:space-between; align-items:center; margin:0 0 12px; color:var(--muted); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:1px; }
+    .birthday-card { --card-bg:#fff7fa; --card-accent:#ad5d7e; --card-ink:#563b49; position:relative; overflow:hidden; min-height:510px; padding:28px; border:1px solid #f0dce5; border-radius:22px; text-align:center; background:var(--card-bg); box-shadow:var(--shadow); }
+    .birthday-card::before, .birthday-card::after { content:"✦"; position:absolute; color:#e8b5c9; font-size:26px; }
+    .birthday-card::before { top:18px; left:20px; } .birthday-card::after { right:20px; bottom:18px; }
+    .birthday-card.floral { background:linear-gradient(145deg,#fff7fa,#fffaf0); }
+    .birthday-card.cute { --card-bg:#fff6ed; --card-accent:#c46b58; --card-ink:#62433c; background:linear-gradient(145deg,#fff5e8,#fff0f4); }
+    .birthday-card.luxury { --card-bg:#24202a; --card-accent:#e4c17d; --card-ink:#f8ebd2; color:var(--card-ink); background:radial-gradient(circle at top,#4a3c4b,#211e28 65%); border-color:#5a4b50; }
+    .card-kicker { text-transform:uppercase; letter-spacing:3px; font-size:10px; font-weight:700; color:var(--card-accent); margin:5px 0 15px; }
+    .photo-frame { width:190px; height:190px; margin:0 auto 16px; padding:7px; border:1px solid #e7bfd0; border-radius:50%; background:#fff; box-shadow:0 7px 24px #6c3b501c; }
+    .photo-frame img { display:block; width:100%; height:100%; object-fit:cover; border-radius:50%; }
+    .photo-placeholder { width:100%; height:100%; display:grid; place-items:center; border-radius:50%; background:linear-gradient(145deg,#f4d9e4,#fff0dc); color:#a66b83; font-size:54px; }
+    .birthday-card.cute .photo-frame { border-radius:23px; transform:rotate(-2deg); }
+    .birthday-card.cute .photo-frame img, .birthday-card.cute .photo-placeholder { border-radius:17px; }
+    .birthday-card.luxury .photo-frame { background:#39303a; border-color:#c6a96e; }
+    .birthday-card h3 { color:var(--card-accent); font:700 clamp(37px,5vw,48px) "Dancing Script",cursive; margin:5px 0 2px; overflow-wrap:anywhere; }
+    .birthday-card .wish { color:var(--card-ink); max-width:370px; margin:13px auto 18px; font:15px/1.7 "DM Sans",sans-serif; white-space:pre-wrap; overflow-wrap:anywhere; }
+    .card-footer { color:var(--card-accent); font:600 20px "Dancing Script",cursive; }
+    .preview-actions { display:flex; gap:10px; margin-top:14px; }
+    .preview-actions .btn { flex:1; padding:12px 10px; font-size:13px; }
+    .how { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+    .step { text-align:center; padding:20px; }
+    .step-number { width:42px; height:42px; border-radius:50%; display:grid; place-items:center; background:#f8dce7; color:var(--pink-dark); font-weight:700; margin:0 auto 13px; }
+    .step h3 { font:600 19px "Playfair Display",serif; margin:0 0 7px; } .step p { color:var(--muted); font-size:13px; line-height:1.6; margin:0; }
+    footer { padding:28px 24px; background:#302630; color:#e9dfe5; text-align:center; font-size:12px; }
+    footer strong { color:#f4c5d7; font:600 19px "Playfair Display",serif; }
+    .toast { position:fixed; bottom:22px; left:50%; transform:translate(-50%,20px); opacity:0; pointer-events:none; background:#302630; color:white; padding:12px 18px; border-radius:999px; font-size:13px; transition:.25s; z-index:5; }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    .confetti { position:fixed; top:-12px; width:8px; height:12px; z-index:10; pointer-events:none; animation:fall 2.8s linear forwards; }
+    @keyframes fall { to { transform:translateY(110vh) rotate(720deg); opacity:0; } }
+    @media(max-width:800px) {
+      .hero-inner { grid-template-columns:1fr; text-align:center; padding-top:55px; gap:15px; }
+      .hero p { margin:auto; } .hero-actions { justify-content:center; } .hero-art { min-height:300px; }
+      .features { grid-template-columns:1fr 1fr; } .creator { grid-template-columns:1fr; }
+      .preview-wrap { position:static; } .how { grid-template-columns:1fr; gap:5px; }
+    }
+    @media(max-width:520px) {
+      .nav { height:65px; } .nav a { margin-left:12px; font-size:12px; }
+      .hero-inner { min-height:0; } section { padding:62px 17px; }
+      .features { grid-template-columns:1fr; } .panel { padding:18px; }
+      .birthday-card { min-height:480px; padding:24px 16px; }
+      .photo-frame { width:165px; height:165px; }
+      .preview-actions { flex-direction:column; }
+    }
+    @media print {
+      body * { visibility:hidden !important; }
+      #birthdayCard, #birthdayCard * { visibility:visible !important; }
+      #birthdayCard { position:absolute; left:0; top:0; width:100%; min-height:95vh; box-shadow:none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="brand">Wish<span>Bloom</span> ✿</div>
+    <nav><a href="#features">Features</a><a href="#create">Create a card</a></nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="eyebrow">A little page full of love</div>
+          <h1>Make their day<br><em>unforgettable.</em></h1>
+          <p>Create a personal birthday card with their photo, your heartfelt words and a little bit of magic. A thoughtful surprise, made in minutes.</p>
+          <div class="hero-actions">
+            <a href="#create"><button class="btn">Create a birthday card ✨</button></a>
+            <a href="#features"><button class="btn secondary">Explore features</button></a>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Birthday card illustration">
+          <span class="float f1">🎈</span><span class="float f2">✦</span><span class="float f3">🎁</span>
+          <div class="hero-card">
+            <div class="mini-photo">🎂</div>
+            <h2>Happy Birthday!</h2>
+            <p>A day as lovely as you are ♡</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features">
+      <div class="section-inner">
+        <div class="section-head">
+          <div class="eyebrow">Small details, big smiles</div>
+          <h2>More than just a birthday wish</h2>
+          <p>Make a simple greeting feel personal with thoughtful details and playful touches.</p>
+        </div>
+        <div class="features">
+          <article class="feature"><div class="emoji">📸</div><h3>Their photo</h3><p>Add a favourite picture and make the birthday card truly theirs.</p></article>
+          <article class="feature"><div class="emoji">💌</div><h3>Your own message</h3><p>Write a heartfelt note, an inside joke or a sweet little wish.</p></article>
+          <article class="feature"><div class="emoji">🎨</div><h3>Choose a style</h3><p>Pick a soft floral, playful cute or elegant luxury card theme.</p></article>
+          <article class="feature"><div class="emoji">🎉</div><h3>A little celebration</h3><p>Tap the celebration button for a burst of colourful confetti.</p></article>
+          <article class="feature"><div class="emoji">🖨️</div><h3>Save or print</h3><p>Print your finished card or save it as a PDF from your browser.</p></article>
+          <article class="feature"><div class="emoji">🔗</div><h3>Share the surprise</h3><p>Share this website link with someone. They can make their own card too.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section id="create">
+      <div class="section-inner">
+        <div class="section-head">
+          <div class="eyebrow">Made just for them</div>
+          <h2>Create your birthday card</h2>
+          <p>Add a photo, write a message and choose the look. Your card preview updates as you create it.</p>
+        </div>
+        <div class="creator">
+          <div class="panel">
+            <h3>Personalize your card</h3>
+            <div class="field">
+              <label for="personName">Birthday person's name</label>
+              <input id="personName" type="text" maxlength="45" placeholder="e.g. Samira" value="Someone Special">
+            </div>
+            <div class="field">
+              <label for="photoUpload">Upload their photo</label>
+              <input id="photoUpload" type="file" accept="image/*">
+              <div class="hint">Choose JPG, PNG or WebP. Your photo stays in this browser and is not uploaded to a server.</div>
+            </div>
+            <div class="field">
+              <label for="message">Your birthday message</label>
+              <textarea id="message" maxlength="350" placeholder="Write something from the heart...">Wishing you endless happiness, love and beautiful memories. May your year be as wonderful as you are!</textarea>
+            </div>
+            <div class="field">
+              <label>Choose a card theme</label>
+              <div class="theme-options">
+                <button class="theme-option active" data-theme="floral" type="button">🌸 Floral</button>
+                <button class="theme-option" data-theme="cute" type="button">🎀 Cute</button>
+                <button class="theme-option" data-theme="luxury" type="button">✨ Luxury</button>
+              </div>
+            </div>
+            <button id="celebrateBtn" class="btn" type="button" style="width:100%">Celebrate with confetti 🎉</button>
+          </div>
+
+          <div class="preview-wrap">
+            <div class="preview-label"><span>Live card preview</span><span>♡</span></div>
+            <article id="birthdayCard" class="birthday-card floral">
+              <div class="card-kicker">A special day for someone special</div>
+              <div class="photo-frame">
+                <div id="photoPlaceholder" class="photo-placeholder">🎂</div>
+                <img id="cardPhoto" alt="Birthday person" hidden>
+              </div>
+              <h3 id="cardName">Someone Special</h3>
+              <p id="cardMessage" class="wish">Wishing you endless happiness, love and beautiful memories. May your year be as wonderful as you are!</p>
+              <div class="card-footer">Made with love ♡</div>
+            </article>
+            <div class="preview-actions">
+              <button id="printBtn" class="btn" type="button">Save / Print card</button>
+              <button id="shareBtn" class="btn secondary" type="button">Share website link ↗</button>
+            </div>
+            <p class="hint">Tip: Choose “Save as PDF” in the print window to keep a digital copy of your card.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-inner">
+        <div class="section-head">
+          <div class="eyebrow">Easy as one, two, three</div>
+          <h2>Your surprise in three steps</h2>
+        </div>
+        <div class="how">
+          <div class="step"><div class="step-number">1</div><h3>Add the details</h3><p>Enter their name, upload a photo and write your message.</p></div>
+          <div class="step"><div class="step-number">2</div><h3>Make it yours</h3><p>Choose a card theme and enjoy the live preview.</p></div>
+          <div class="step"><div class="step-number">3</div><h3>Save the memory</h3><p>Print the card or save it as a PDF and send it to them.</p></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><strong>WishBloom ✿</strong><p>Made for the people who make life special.</p></footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const nameInput = document.getElementById('personName');
+    const messageInput = document.getElementById('message');
+    const photoInput = document.getElementById('photoUpload');
+    const card = document.getElementById('birthdayCard');
+    const cardName = document.getElementById('cardName');
+    const cardMessage = document.getElementById('cardMessage');
+    const cardPhoto = document.getElementById('cardPhoto');
+    const photoPlaceholder = document.getElementById('photoPlaceholder');
+    const toast = document.getElementById('toast');
+    let photoUrl = null;
+
+    function updateCard() {
+      cardName.textContent = nameInput.value.trim() || 'Someone Special';
+      cardMessage.textContent = messageInput.value.trim() || 'Wishing you a day filled with happiness and love!';
+    }
+    nameInput.addEventListener('input', updateCard);
+    messageInput.addEventListener('input', updateCard);
+
+    photoInput.addEventListener('change', (event) => {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+      if (!file.type.startsWith('image/')) {
+        showToast('Please choose an image file.');
+        photoInput.value = '';
+        return;
+      }
+      if (file.size > 8 * 1024 * 1024) {
+        showToast('Please choose an image smaller than 8 MB.');
+        photoInput.value = '';
+        return;
+      }
+      if (photoUrl) URL.revokeObjectURL(photoUrl);
+      photoUrl = URL.createObjectURL(file);
+      cardPhoto.src = photoUrl;
+      cardPhoto.hidden = false;
+      photoPlaceholder.hidden = true;
+    });
+
+    document.querySelectorAll('.theme-option').forEach((button) => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.theme-option').forEach((item) => item.classList.remove('active'));
+        button.classList.add('active');
+        card.classList.remove('floral', 'cute', 'luxury');
+        card.classList.add(button.dataset.theme);
+      });
+    });
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      window.clearTimeout(showToast.timer);
+      showToast.timer = window.setTimeout(() => toast.classList.remove('show'), 2600);
+    }
+
+    function celebrate() {
+      const symbols = ['✦', '●', '♥', '✿'];
+      const colours = ['#e78caf', '#e8c47c', '#a8c9df', '#b9d9b5', '#c8afe1'];
+      for (let i = 0; i < 75; i++) {
+        const bit = document.createElement('span');
+        bit.className = 'confetti';
+        bit.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+        bit.style.left = Math.random() * 100 + 'vw';
+        bit.style.color = colours[Math.floor(Math.random() * colours.length)];
+        bit.style.fontSize = (8 + Math.random() * 12) + 'px';
+        bit.style.animationDuration = (1.8 + Math.random() * 1.8) + 's';
+        document.body.appendChild(bit);
+        window.setTimeout(() => bit.remove(), 4000);
+      }
+    }
+    document.getElementById('celebrateBtn').addEventListener('click', celebrate);
+    document.getElementById('printBtn').addEventListener('click', () => {
+      window.print();
+    });
+    document.getElementById('shareBtn').addEventListener('click', async () => {
+      const shareData = { title: 'A birthday surprise from WishBloom', text: 'Create a special birthday card with WishBloom!', url: window.location.href };
+      try {
+        if (navigator.share) await navigator.share(shareData);
+        else if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(window.location.href);
+          showToast('Website link copied!');
+        } else {
+          showToast('Copy the website address from your browser to share it.');
+        }
+      } catch (error) {
+        if (error.name !== 'AbortError') showToast('Could not share right now. Copy the website link instead.');
+      }
+    });
+    updateCard();
+  </script>
+</body>
+</html>
